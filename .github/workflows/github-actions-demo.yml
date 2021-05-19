@@ -23,6 +23,6 @@ jobs:
       - name: commit changes to branch
         uses: EndBug/add-and-commit@v7
         with:
-          default_author: schema_robot
+          default_author: github_actions
           message: 'Regenerate api types based off of schema update'
       - run: echo "🍏 This job's status is ${{ job.status }}."
