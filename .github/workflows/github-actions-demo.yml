@@ -26,6 +26,5 @@ jobs:
       - name: commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          ref: ${{ github.head_ref }}
           message: 'Regenerate api types based off of schema update'
       - run: echo "🍏 This job's status is ${{ job.status }}."
