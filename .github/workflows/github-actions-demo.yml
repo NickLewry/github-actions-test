@@ -8,16 +8,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: borales/actions-yarn@v2.0.0
+      - name: yarn install
+        uses: borales/actions-yarn@v2.0.0
         with:
           cmd: install
-      - uses: borales/actions-yarn@v2.0.0
+      - name: yarn test
+        uses: borales/actions-yarn@v2.0.0
         with:
           cmd: test
-      - uses: borales/actions-yarn@v2.0.0
+      - name: yarn type-check
+        uses: borales/actions-yarn@v2.0.0
         with:
           cmd: type-check
-      - uses: borales/actions-yarn@v2.0.0
+      - name: yarn test
+        uses: borales/actions-yarn@v2.0.0
         with:
           cmd: test
       - run: echo "🍏 This job's status is ${{ job.status }}."
