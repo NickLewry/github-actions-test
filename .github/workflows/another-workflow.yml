@@ -1,5 +1,8 @@
 name: Another workflow
-on: [push]
+on:
+  push:
+    branches:
+      - "hello"
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
