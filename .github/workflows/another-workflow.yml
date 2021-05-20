@@ -1,11 +1,5 @@
 name: Another workflow
-on:
-  push:
-    branches:
-      - test
-  pull_request:
-    branches:
-      - test
+on: [push, pull_request]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
