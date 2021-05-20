@@ -1,5 +1,5 @@
 name: Another workflow
-on: [push, pull_request]
+on: [push]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
@@ -34,9 +34,7 @@ jobs:
       - name: Commit report
         run: |
           if [ -n "$(git status -s)" ]; then
-            echo "Changes detected ${GITHUB_REF#refs/heads/}"
-            git fetch --depth=1
-            git checkout "${GITHUB_REF#refs/heads/}"
+            echo "Changes detected"
             git config --global user.name 'GitHub Actions'
             git config --global user.email 'actions@github.com'
             git commit -am "Automated report" \
