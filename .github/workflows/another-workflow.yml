@@ -26,17 +26,14 @@ jobs:
           restore-keys: |
             v1-${{ steps.node-version.outputs.version }}-node-
       - name: yarn install
-        with:
-          cmd: install
+        run: |
+          yarn install
       - name: yarn test
-        with:
-          cmd: test
+        run: |
+          yarn test
       - name: yarn type-check
-        with:
-          cmd: type-check
-      - name: yarn prettier
-        with:
-          cmd: prettier
+        run: |
+          yarn type-check
       - name: commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
