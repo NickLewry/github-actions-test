@@ -4,7 +4,6 @@ import { User } from "../interfaces";
 
 type Props = {
   items: User[];
-  hello?: boolean;
 };
 
 const List = ({ items }: Props) => (
