@@ -2,10 +2,7 @@ name: Another workflow
 on:
   push:
     branches:
-      - test
-  pull_request:
-    branches:
-      - test
+      - "hello"
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
@@ -34,7 +31,18 @@ jobs:
       - name: yarn type-check
         run: |
           yarn type-check
-      - name: commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: 'Regenerate api types based off of schema update'
+      - name: yarn prettier
+        run: |
+          yarn prettier
+      - name: Commit report
+        run: |
+          if [ -n "$(git status -s)" ]; then
+            echo "Changes detected"
+            git config --global user.name 'GitHub Actions'
+            git config --global user.email 'actions@github.com'
+            git commit -am "Automated report" \
+            --author '${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>'
+            git push --set-upstream origin "HEAD:${GITHUB_REF#refs/heads/}"
+          else
+            echo "Working tree clean. Nothing to commit.";
+          fi
