@@ -35,7 +35,7 @@ jobs:
         run: |
           yarn type-check
       - name: Commit report
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
         run: |
           git commit -am "Automated report"
           git push
