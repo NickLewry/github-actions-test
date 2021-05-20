@@ -12,6 +12,7 @@ const ListDetail = ({ item: user }: ListDetailProps) => (
 
 
 
+
     <p> ID: {user.id} </p>
   </div>
 );
