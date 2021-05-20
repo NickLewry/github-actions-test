@@ -11,19 +11,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: Get node version
+        id: node-version
+        run: |
+          echo "::set-output name=version::$(node --version)"
+      - name: Setup yarn cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/yarn
+          key: v1-${{ steps.node-version.outputs.version }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            v1-${{ steps.node-version.outputs.version }}-node-
       - name: yarn install
-        uses: borales/actions-yarn@v2.0.0
         with:
           cmd: install
       - name: yarn test
-        uses: borales/actions-yarn@v2.0.0
         with:
           cmd: test
       - name: yarn type-check
-        uses: borales/actions-yarn@v2.0.0
         with:
           cmd: type-check
       - name: yarn prettier
-        uses: borales/actions-yarn@v2.0.0
         with:
           cmd: prettier
+      - name: commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'Regenerate api types based off of schema update'
