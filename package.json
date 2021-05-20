@@ -7,7 +7,7 @@
     "start": "next start",
     "type-check": "tsc",
     "test": "jest",
-    "prettier": "prettier --write ./components/ListDetail.tsx"
+    "prettier": "prettier --write ./components/ListItem.tsx"
   },
   "dependencies": {
     "next": "latest",
