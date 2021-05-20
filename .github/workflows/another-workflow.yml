@@ -34,7 +34,8 @@ jobs:
       - name: yarn type-check
         run: |
           yarn type-check
-      - name: commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: 'Regenerate api types based off of schema update'
+      - name: Commit report
+      - uses: actions/checkout@v2
+        run: |
+          git commit -am "Automated report"
+          git push
