@@ -1,0 +1,29 @@
+name: Another workflow
+on:
+  push:
+    branches:
+      - test
+  pull_request:
+    branches:
+      - test
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: yarn install
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install
+      - name: yarn test
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: test
+      - name: yarn type-check
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: type-check
+      - name: yarn prettier
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: prettier
