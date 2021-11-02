@@ -6,12 +6,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
+        with:
+          token: ${{ secrets.PUSH_REPO_TOKEN }}
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
       - name: Create pull request
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.PUSH_REPO_TOKEN }}
         run: |
           CLONE_DIR=$(mktemp -d)
           TARGET_BRANCH="master"
