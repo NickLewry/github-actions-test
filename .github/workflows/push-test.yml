@@ -1,0 +1,18 @@
+name: Push repo test
+on:
+  push
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: Create pull request
+        run: |
+          CLONE_DIR=$(mktemp -d)
+          DESTINATION_REPOSITORY_NAME="beer-utiful"
+
+          echo "[+] Cloning destination git repository $DESTINATION_REPOSITORY_NAME"
+
