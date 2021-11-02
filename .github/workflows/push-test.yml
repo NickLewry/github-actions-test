@@ -16,7 +16,8 @@ jobs:
           CLONE_DIR=$(mktemp -d)
           TARGET_BRANCH="master"
           USER_NAME="GitHub Actions"
-          DESTINATION_REPOSITORY_NAME="NickLewry/beer-utiful"
+          TARGET_DIRECTORY="bru/random"
+          DESTINATION_REPOSITORY_NAME="beer-utiful"
 
           echo "[+] Cloning destination git repository $DESTINATION_REPOSITORY_NAME"
 
@@ -26,5 +27,31 @@ jobs:
           git clone --single-branch --branch "$TARGET_BRANCH" "https://github.com/NickLewry/beer-utiful.git" "$CLONE_DIR"
 
           ls -la "$CLONE_DIR"
+
+          TEMP_DIR=$(mktemp -d)
+
+          mv "$CLONE_DIR/.git" "$TEMP_DIR/.git"
+
+          if [ -n "$TARGET_DIRECTORY" ]
+          then
+
+            echo "[+] Checking if $TARGET_DIRECTORY exist in git repo $DESTINATION_REPOSITORY_NAME"
+
+            # Remove contents of target directory and create a new empty one
+            if [ -d "$CLONE_DIR/$TARGET_DIRECTORY/" ]
+            then
+              echo "[+] Deleting files from $TARGET_DIRECTORY in git repo $DESTINATION_REPOSITORY_NAME"
+              rm -R "$CLONE_DIR/$TARGET_DIRECTORY/"
+            fi
+            echo "[+] Creating $TARGET_DIRECTORY if doesnt already exist"
+
+            mkdir -p "$CLONE_DIR/$TARGET_DIRECTORY"
+
+            echo "[+] Listing Current Directory Location"
+            ls -al
+
+            echo "[+] Listing root Location"
+            ls -al /
+          fi
 
 
