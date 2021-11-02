@@ -43,6 +43,7 @@ jobs:
               echo "[+] Deleting files from $TARGET_DIRECTORY in git repo $DESTINATION_REPOSITORY_NAME"
               rm -R "$CLONE_DIR/$TARGET_DIRECTORY/"
             fi
+
             echo "[+] Creating $TARGET_DIRECTORY if doesnt already exist"
 
             mkdir -p "$CLONE_DIR/$TARGET_DIRECTORY"
@@ -53,5 +54,27 @@ jobs:
             echo "[+] Listing root Location"
             ls -al /
           fi
+
+          mv "$TEMP_DIR/.git" "$CLONE_DIR/.git"
+
+          echo "[+] List contents of $SOURCE_DIRECTORY"
+          ls "$SOURCE_DIRECTORY"
+
+          echo "[+] Copying contents of source repository folder $SOURCE_DIRECTORY to folder $TARGET_DIRECTORY in git repo $DESTINATION_REPOSITORY_NAME"
+          cp -ra "$SOURCE_DIRECTORY"/. "$CLONE_DIR/$TARGET_DIRECTORY"
+          cd "$CLONE_DIR"
+
+          echo "[+] Files that will be pushed"
+          ls -la
+
+          ORIGIN_COMMIT="https://$GITHUB_SERVER/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
+          COMMIT_MESSAGE="${COMMIT_MESSAGE/ORIGIN_COMMIT/$ORIGIN_COMMIT}"
+          COMMIT_MESSAGE="${COMMIT_MESSAGE/\$GITHUB_REF/$GITHUB_REF}"
+
+          echo "[+] Adding git commit"
+          git add .
+
+          echo "[+] git status:"
+          git status
 
 
