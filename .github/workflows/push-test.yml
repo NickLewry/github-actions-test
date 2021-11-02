@@ -32,28 +32,28 @@ jobs:
 
           mv "$CLONE_DIR/.git" "$TEMP_DIR/.git"
 
-          # if [ -n "$TARGET_DIRECTORY" ]
-          # then
+          if [ -n "$TARGET_DIRECTORY" ]
+          then
 
-          #   echo "[+] Checking if $TARGET_DIRECTORY exist in git repo $DESTINATION_REPOSITORY_NAME"
+            echo "[+] Checking if $TARGET_DIRECTORY exist in git repo $DESTINATION_REPOSITORY_NAME"
 
-          #   # Remove contents of target directory and create a new empty one
-          #   if [ -d "$CLONE_DIR/$TARGET_DIRECTORY/" ]
-          #   then
-          #     echo "[+] Deleting files from $TARGET_DIRECTORY in git repo $DESTINATION_REPOSITORY_NAME"
-          #     rm -R "$CLONE_DIR/$TARGET_DIRECTORY/"
-          #   fi
+            # Remove contents of target directory and create a new empty one
+            if [ -d "$CLONE_DIR/$TARGET_DIRECTORY/" ]
+            then
+              echo "[+] Deleting files from $TARGET_DIRECTORY in git repo $DESTINATION_REPOSITORY_NAME"
+              rm -R "$CLONE_DIR/$TARGET_DIRECTORY/"
+            fi
 
-          #   echo "[+] Creating $TARGET_DIRECTORY if doesnt already exist"
+            echo "[+] Creating $TARGET_DIRECTORY if doesnt already exist"
 
-          #   mkdir -p "$CLONE_DIR/$TARGET_DIRECTORY"
+            mkdir -p "$CLONE_DIR/$TARGET_DIRECTORY"
 
-          #   echo "[+] Listing Current Directory Location"
-          #   ls -al
+            echo "[+] Listing Current Directory Location"
+            ls -al
 
-          #   echo "[+] Listing root Location"
-          #   ls -al /
-          # fi
+            echo "[+] Listing root Location"
+            ls -al /
+          fi
 
           mv "$TEMP_DIR/.git" "$CLONE_DIR/.git"
 
