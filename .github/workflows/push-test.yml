@@ -25,7 +25,7 @@ jobs:
           git config --global user.name $USER_NAME
           git config --global user.email 'actions@github.com'
 
-          git clone --single-branch --branch "schema-updates" "https://github.com/NickLewry/beer-utiful.git" "$CLONE_DIR"
+          git clone --single-branch --branch "master" "https://github.com/NickLewry/beer-utiful.git" "$CLONE_DIR"
 
           ls -la "$CLONE_DIR"
 
@@ -85,6 +85,8 @@ jobs:
 
           echo "[+] Files that will be pushed"
           ls -la
+
+          git checkout -b schema-updates
 
           ORIGIN_COMMIT="https://$GITHUB_SERVER/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
           COMMIT_MESSAGE="${COMMIT_MESSAGE/ORIGIN_COMMIT/$ORIGIN_COMMIT}"
