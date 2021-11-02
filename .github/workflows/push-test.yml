@@ -14,18 +14,18 @@ jobs:
           PUSH_REPO_TOKEN: ${{ secrets.PUSH_REPO_TOKEN }}
         run: |
           CLONE_DIR=$(mktemp -d)
-          TARGET_BRANCH="master"
           USER_NAME="GitHubActions"
-          TARGET_DIRECTORY="hello"
+          BRANCH_NAME="schema-updates"
           SOURCE_DIR="utils"
-          DESTINATION_REPOSITORY_NAME="beer-utiful"
+          TARGET_DIRECTORY="hello"
+          DESTINATION_REPOSITORY_NAME="NickLewry/beer-utiful.git"
 
           echo "[+] Cloning destination git repository $DESTINATION_REPOSITORY_NAME"
 
           git config --global user.name $USER_NAME
           git config --global user.email 'actions@github.com'
 
-          git clone --single-branch --branch "master" "https://github.com/NickLewry/beer-utiful.git" "$CLONE_DIR"
+          git clone --single-branch --branch "master" "https://github.com/$DESTINATION_REPOSITORY_NAME" "$CLONE_DIR"
 
           ls -la "$CLONE_DIR"
 
@@ -64,21 +64,6 @@ jobs:
           echo "[+] List contents of $SOURCE_DIR"
           ls "$SOURCE_DIR"
 
-          # echo "[+] Checking if local $SOURCE_DIRECTORY exist"
-          # if [ ! -d "$SOURCE_DIR" ]
-          # then
-          #   echo "ERROR: $SOURCE_DIR does not exist"
-          #   echo "This directory needs to exist when push-to-another-repository is executed"
-          #   echo
-          #   echo "In the example it is created by ./build.sh: https://github.com/cpina/push-to-another-repository-example/blob/main/.github/workflows/ci.yml#L19"
-          #   echo
-          #   echo "If you want to copy a directory that exist in the source repository"
-          #   echo "to the target repository: you need to clone the source repository"
-          #   echo "in a previous step in the same build section. For example using"
-          #   echo "actions/checkout@v2. See: https://github.com/cpina/push-to-another-repository-example/blob/main/.github/workflows/ci.yml#L16"
-          #   exit 1
-          # fi
-
           echo "[+] Copying contents of source repository folder $SOURCE_DIR to folder $TARGET_DIRECTORY in git repo $DESTINATION_REPOSITORY_NAME"
           cp -ra "$SOURCE_DIR"/. "$CLONE_DIR/$TARGET_DIRECTORY"
           cd "$CLONE_DIR"
@@ -86,7 +71,7 @@ jobs:
           echo "[+] Files that will be pushed"
           ls -la
 
-          git checkout -b schema-updates
+          git checkout -b $BRANCH_NAME
 
           ORIGIN_COMMIT="https://$GITHUB_SERVER/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
           COMMIT_MESSAGE="${COMMIT_MESSAGE/ORIGIN_COMMIT/$ORIGIN_COMMIT}"
@@ -104,10 +89,7 @@ jobs:
           git diff-index --quiet HEAD || git commit --message "schema updates"
 
           echo "[+] Pushing git commit"
-          # --set-upstream: sets de branch when pushing to a branch that does not exist
+          git push --set-upstream "https://$PUSH_REPO_TOKEN@github.com/$DESTINATION_REPOSITORY_NAME/" $BRANCH_NAME
 
-          RESTER="NickLewry/beer-utiful.git"
-
-          echo "this is the url: https://$USER_NAME:$PUSH_REPO_TOKEN/github.com/$RESTER/"
-
-          git push --set-upstream "https://$PUSH_REPO_TOKEN@github.com/$RESTER/" "schema-updates"
+          echo "creating pull request"
+          hub pull-request -b "master" -h $BRANCH_NAME
