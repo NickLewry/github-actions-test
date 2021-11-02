@@ -108,4 +108,4 @@ jobs:
 
           echo "this is the url: https://$USER_NAME:$PUSH_REPO_TOKEN/github.com/$RESTER/"
 
-          git push "https://$USER_NAME:$PUSH_REPO_TOKEN/github.com/$RESTER/" --set-upstream "master"
+          git push "https://$PUSH_REPO_TOKEN@github.com/$RESTER/" --set-upstream "master"
