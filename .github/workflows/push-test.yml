@@ -57,24 +57,24 @@ jobs:
 
           mv "$TEMP_DIR/.git" "$CLONE_DIR/.git"
 
-          echo "[+] List contents of $TARGET_DIRECTORY"
-          ls "$TARGET_DIRECTORY"
+          # echo "[+] List contents of $TARGET_DIRECTORY"
+          # ls "$TARGET_DIRECTORY"
 
-          echo "[+] Copying contents of source repository folder $TARGET_DIRECTORY to folder $TARGET_DIRECTORY in git repo $DESTINATION_REPOSITORY_NAME"
-          cp -ra "$TARGET_DIRECTORY"/. "$CLONE_DIR/$TARGET_DIRECTORY"
-          cd "$CLONE_DIR"
+          # echo "[+] Copying contents of source repository folder $TARGET_DIRECTORY to folder $TARGET_DIRECTORY in git repo $DESTINATION_REPOSITORY_NAME"
+          # cp -ra "$TARGET_DIRECTORY"/. "$CLONE_DIR/$TARGET_DIRECTORY"
+          # cd "$CLONE_DIR"
 
-          echo "[+] Files that will be pushed"
-          ls -la
+          # # echo "[+] Files that will be pushed"
+          # # ls -la
 
-          ORIGIN_COMMIT="https://$GITHUB_SERVER/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
-          COMMIT_MESSAGE="${COMMIT_MESSAGE/ORIGIN_COMMIT/$ORIGIN_COMMIT}"
-          COMMIT_MESSAGE="${COMMIT_MESSAGE/\$GITHUB_REF/$GITHUB_REF}"
+          # # ORIGIN_COMMIT="https://$GITHUB_SERVER/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
+          # # COMMIT_MESSAGE="${COMMIT_MESSAGE/ORIGIN_COMMIT/$ORIGIN_COMMIT}"
+          # # COMMIT_MESSAGE="${COMMIT_MESSAGE/\$GITHUB_REF/$GITHUB_REF}"
 
-          echo "[+] Adding git commit"
-          git add .
+          # # echo "[+] Adding git commit"
+          # # git add .
 
-          echo "[+] git status:"
-          git status
+          # # echo "[+] git status:"
+          # # git status
 
 
