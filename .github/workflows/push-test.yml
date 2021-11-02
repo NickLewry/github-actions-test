@@ -103,5 +103,5 @@ jobs:
 
           echo "[+] Pushing git commit"
           # --set-upstream: sets de branch when pushing to a branch that does not exist
-          git push "https://$USER_NAME:$PUSH_REPO_TOKEN@$GITHUB_SERVER/$USER_NAME/$DESTINATION_REPOSITORY_NAME.git" --set-upstream "master"
+          git push "https://$USER_NAME:$PUSH_REPO_TOKEN@$GITHUB_SERVER/NickLewry/beer-utiful.git" --set-upstream "master"
 
