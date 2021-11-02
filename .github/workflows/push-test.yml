@@ -12,6 +12,7 @@ jobs:
       - name: Create pull request
         env:
           PUSH_REPO_TOKEN: ${{ secrets.PUSH_REPO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PUSH_REPO_TOKEN }}
         run: |
           CLONE_DIR=$(mktemp -d)
           USER_NAME="GitHubActions"
