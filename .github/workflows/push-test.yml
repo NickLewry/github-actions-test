@@ -106,7 +106,6 @@ jobs:
 
           RESTER="NickLewry/beer-utiful.git"
 
-          echo "this is the url: https://$USER_NAME:$PUSH_REPO_TOKEN@$GITHUB_SERVER$RESTER"
+          echo "this is the url: https://$PUSH_REPO_TOKEN@github.com/$RESTER/"
 
-          git push "https://$RESTER" --set-upstream "master"
-
+          git push "https://$PUSH_REPO_TOKEN@github.com/$RESTER/" --set-upstream "master"
