@@ -93,4 +93,4 @@ jobs:
           git push --set-upstream "https://$PUSH_REPO_TOKEN@github.com/$DESTINATION_REPOSITORY_NAME/" $BRANCH_NAME
 
           echo "creating pull request"
-          hub pull-request -b "master" -h $BRANCH_NAME
+          hub pull-request -b "master" -h $BRANCH_NAME --no-edit
