@@ -16,7 +16,7 @@ jobs:
           CLONE_DIR=$(mktemp -d)
           TARGET_BRANCH="master"
           USER_NAME="GitHub Actions"
-          TARGET_DIRECTORY="bru/random"
+          TARGET_DIRECTORY="hello"
           SOURCE_DIR="utils"
           DESTINATION_REPOSITORY_NAME="beer-utiful"
 
