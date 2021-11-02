@@ -57,6 +57,9 @@ jobs:
 
           mv "$TEMP_DIR/.git" "$CLONE_DIR/.git"
 
+          echo "[+] Listing Current Directory Location 2"
+            ls -al
+
           # echo "[+] List contents of $TARGET_DIRECTORY"
           # ls "$TARGET_DIRECTORY"
 
