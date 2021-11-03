@@ -95,7 +95,7 @@ jobs:
           echo "[+] Pushing git commit"
           git push --force --set-upstream "https://$PUSH_REPO_TOKEN@github.com/$i/" $BRANCH_NAME
 
-          IS_SCHEMA_PR_OPEN=$(hub pr list --head $BRANCH_NAME)
+          IS_SCHEMA_PR_OPEN=$(gh pr list --repo "https://github.com/$i" --head $BRANCH_NAME)
 
 
 
@@ -107,10 +107,6 @@ jobs:
               echo "Creating pull request"
               hub pull-request -b "master" -h $BRANCH_NAME --no-edit
           fi
-
-          echo "listing repos"
-
-          gh pr list --repo "https://github.com/$i" --head $BRANCH_NAME
 
           cd "/"
 
