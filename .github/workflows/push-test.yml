@@ -117,6 +117,13 @@ jobs:
 
           ls -al
 
+
+          cd "home/runner/work/github-actions-test/github-actions-test"
+
+          echo "printing current pisition *****************"
+
+          pwd
+
           done
 
 
