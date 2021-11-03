@@ -111,7 +111,7 @@ jobs:
           pwd
 
 
-          cd ../../
+          cd "~/home/runner/work/github-actions-test/github-actions-test"
 
           echo "after cd at bottom"
 
