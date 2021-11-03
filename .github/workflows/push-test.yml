@@ -29,7 +29,7 @@ jobs:
 
           declare -a TARGET_REPOSITORIES=("NickLewry/beer-utiful.git" "NickLewry/beer-utiful.git")
 
-          for i "${TARGET_REPOSITORIES[@]}";
+          for i in "${TARGET_REPOSITORIES[@]}";
           do
 
           echo "Pushing Schema updates to $i"
