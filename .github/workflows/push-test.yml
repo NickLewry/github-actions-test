@@ -30,6 +30,8 @@ jobs:
           for i in "${TARGET_REPOSITORIES[@]}";
           do
 
+          cd "/"
+
           CLONE_DIR=$(mktemp -d)
 
           echo "Pushing Schema updates to $i"
@@ -101,8 +103,6 @@ jobs:
               echo "Creating pull request"
               hub pull-request -b "master" -h $BRANCH_NAME --no-edit
           fi
-
-          cd "/"
 
           done
 
