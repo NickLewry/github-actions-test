@@ -110,6 +110,11 @@ jobs:
 
           pwd
 
+
+          cd ../../
+
+          echo "after cd at bottom"
+
           done
 
 
