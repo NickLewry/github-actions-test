@@ -80,14 +80,10 @@ jobs:
 
           IS_SCHEMA_PR_OPEN=$(hub pr list --head "schema-updates")
 
-
           if [ -n IS_SCHEMA_PR_OPEN ]
           then
-              echo "there is a PR open **********"
+              echo "Pull request already exists"
+          else
+              echo "Creating pull request"
+              hub pull-request -b "master" -h $BRANCH_NAME --no-edit
           fi
-
-          echo "PR LIST ***************** $IS_SCHEMA_PR_OPEN"
-          hub pr list --head "schema-updates"
-
-          # echo "Creating pull request"
-          # hub pull-request -b "master" -h $BRANCH_NAME --no-edit
