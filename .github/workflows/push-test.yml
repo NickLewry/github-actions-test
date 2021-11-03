@@ -24,9 +24,8 @@ jobs:
           BRANCH_NAME="schema-updates"
           SOURCE_DIR="utils"
           TARGET_DIRECTORY="hello"
-          DESTINATION_REPOSITORY_NAME="NickLewry/beer-utiful.git"
 
-          declare -a TARGET_REPOSITORIES=("NickLewry/beer-utiful.git" "NickLewry/beer-utiful.git")
+          declare -a TARGET_REPOSITORIES=("NickLewry/beer-utiful.git" "NickLewry/next-msw-swr.git")
 
           for i in "${TARGET_REPOSITORIES[@]}";
           do
@@ -35,12 +34,12 @@ jobs:
 
           echo "Pushing Schema updates to $i"
 
-          echo "[+] Cloning destination git repository $DESTINATION_REPOSITORY_NAME"
+          echo "[+] Cloning destination git repository $i"
 
           git config --global user.name $USER_NAME
           git config --global user.email 'actions@github.com'
 
-          git clone --single-branch --branch "master" "https://github.com/$DESTINATION_REPOSITORY_NAME" "$CLONE_DIR"
+          git clone --single-branch --branch "master" "https://github.com/$i" "$CLONE_DIR"
 
           ls -la "$CLONE_DIR"
 
@@ -51,12 +50,12 @@ jobs:
           if [ -n "$TARGET_DIRECTORY" ]
           then
 
-            echo "[+] Checking if $TARGET_DIRECTORY exist in git repo $DESTINATION_REPOSITORY_NAME"
+            echo "[+] Checking if $TARGET_DIRECTORY exist in git repo $i"
 
             # Remove contents of target directory and create a new empty one
             if [ -d "$CLONE_DIR/$TARGET_DIRECTORY/" ]
             then
-              echo "[+] Deleting files from $TARGET_DIRECTORY in git repo $DESTINATION_REPOSITORY_NAME"
+              echo "[+] Deleting files from $TARGET_DIRECTORY in git repo $i"
               rm -R "$CLONE_DIR/$TARGET_DIRECTORY/"
             fi
 
@@ -73,7 +72,7 @@ jobs:
 
           mv "$TEMP_DIR/.git" "$CLONE_DIR/.git"
 
-          echo "[+] Copying contents of source repository folder $SOURCE_DIR to folder $TARGET_DIRECTORY in git repo $DESTINATION_REPOSITORY_NAME"
+          echo "[+] Copying contents of source repository folder $SOURCE_DIR to folder $TARGET_DIRECTORY in git repo $i"
           cp -ra "$SOURCE_DIR"/. "$CLONE_DIR/$TARGET_DIRECTORY"
           cd "$CLONE_DIR"
 
@@ -90,7 +89,7 @@ jobs:
           git diff-index --quiet HEAD || git commit --message "schema updates"
 
           echo "[+] Pushing git commit"
-          git push --force --set-upstream "https://$PUSH_REPO_TOKEN@github.com/$DESTINATION_REPOSITORY_NAME/" $BRANCH_NAME
+          git push --force --set-upstream "https://$PUSH_REPO_TOKEN@github.com/$i/" $BRANCH_NAME
 
           IS_SCHEMA_PR_OPEN=$(hub pr list --head $BRANCH_NAME)
 
