@@ -78,7 +78,8 @@ jobs:
           echo "[+] Pushing git commit"
           git push --force --set-upstream "https://$PUSH_REPO_TOKEN@github.com/$DESTINATION_REPOSITORY_NAME/" $BRANCH_NAME
 
-          hub pr list --base "schema updates"
+          echo "PR LIST *****************"
+          hub pr list --base "schema updates" --format='%t [%H] | %U%n
 
           # echo "Creating pull request"
           # hub pull-request -b "master" -h $BRANCH_NAME --no-edit
