@@ -97,6 +97,8 @@ jobs:
 
           IS_SCHEMA_PR_OPEN=$(hub pr list --head $BRANCH_NAME)
 
+
+
           # Determine if we need to create a new PR
           if [ -n IS_SCHEMA_PR_OPEN ]
           then
@@ -106,23 +108,13 @@ jobs:
               hub pull-request -b "master" -h $BRANCH_NAME --no-edit
           fi
 
-          echo "directory at the bottom"
+          echo "listing repos"
 
-          pwd
+          gh pr list --repo "https://github.com/$i"
 
-
-          cd "/"
-
-          echo "after cd at bottom"
-
-          ls -al
-
+          cd "/""
 
           cd "home/runner/work/github-actions-test/github-actions-test"
-
-          echo "printing current pisition *****************"
-
-          pwd
 
           done
 
