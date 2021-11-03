@@ -80,6 +80,11 @@ jobs:
 
           IS_SCHEMA_PR_OPEN=$(hub pr list --head "schema-updates")
 
+
+          if [-n IS_SCHEMA_PR_OPEN]
+          then
+              echo "there is a PR open **********"
+
           echo "PR LIST ***************** $IS_SCHEMA_PR_OPEN"
           hub pr list --head "schema-updates"
 
