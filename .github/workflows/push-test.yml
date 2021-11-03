@@ -20,7 +20,6 @@ jobs:
           PUSH_REPO_TOKEN: ${{ secrets.PUSH_REPO_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.PUSH_REPO_TOKEN }}
         run: |
-          CLONE_DIR=$(mktemp -d)
           USER_NAME="GitHubActions"
           BRANCH_NAME="schema-updates"
           SOURCE_DIR="utils"
@@ -31,6 +30,8 @@ jobs:
 
           for i in "${TARGET_REPOSITORIES[@]}";
           do
+
+          CLONE_DIR=$(mktemp -d)
 
           echo "Pushing Schema updates to $i"
 
