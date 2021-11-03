@@ -30,7 +30,9 @@ jobs:
           for i in "${TARGET_REPOSITORIES[@]}";
           do
 
-          cd "/"
+          echo "current directory"
+
+          pwd
 
           CLONE_DIR=$(mktemp -d)
 
@@ -103,6 +105,10 @@ jobs:
               echo "Creating pull request"
               hub pull-request -b "master" -h $BRANCH_NAME --no-edit
           fi
+
+          echo "directory at the bottom"
+
+          pwd
 
           done
 
