@@ -102,6 +102,8 @@ jobs:
               hub pull-request -b "master" -h $BRANCH_NAME --no-edit
           fi
 
+          cd "../"
+
           done
 
 
