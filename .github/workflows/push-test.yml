@@ -1,6 +1,12 @@
 name: Push repo test
 on:
-  push
+  push:
+    branches:
+      - "**"
+    # paths:
+    #   - docs/schema-2015-07-06/schema-private.json
+    #   - docs/schema-2015-07-06/schema-secret.json
+    #   - docs/schema-2015-07-06/schema-public.json
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
@@ -9,7 +15,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - name: Create pull request
+      - name: Create updated JSON schema PR
         env:
           PUSH_REPO_TOKEN: ${{ secrets.PUSH_REPO_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.PUSH_REPO_TOKEN }}
@@ -20,6 +26,13 @@ jobs:
           SOURCE_DIR="utils"
           TARGET_DIRECTORY="hello"
           DESTINATION_REPOSITORY_NAME="NickLewry/beer-utiful.git"
+
+          declare -a TARGET_REPOSITORIES=("NickLewry/beer-utiful.git" "NickLewry/beer-utiful.git")
+
+          for i "${TARGET_REPOSITORIES[@]}";
+          do
+
+          echo "Pushing Schema updates to $i"
 
           echo "[+] Cloning destination git repository $DESTINATION_REPOSITORY_NAME"
 
@@ -46,7 +59,7 @@ jobs:
               rm -R "$CLONE_DIR/$TARGET_DIRECTORY/"
             fi
 
-            echo "[+] Creating $TARGET_DIRECTORY if it doesnt already exist"
+            echo "[+] Creating $TARGET_DIRECTORY if it doesn't already exist"
 
             mkdir -p "$CLONE_DIR/$TARGET_DIRECTORY"
 
@@ -78,8 +91,9 @@ jobs:
           echo "[+] Pushing git commit"
           git push --force --set-upstream "https://$PUSH_REPO_TOKEN@github.com/$DESTINATION_REPOSITORY_NAME/" $BRANCH_NAME
 
-          IS_SCHEMA_PR_OPEN=$(hub pr list --head "schema-updates")
+          IS_SCHEMA_PR_OPEN=$(hub pr list --head $BRANCH_NAME)
 
+          # Determine if we need to create a new PR
           if [ -n IS_SCHEMA_PR_OPEN ]
           then
               echo "Pull request already exists"
@@ -87,3 +101,7 @@ jobs:
               echo "Creating pull request"
               hub pull-request -b "master" -h $BRANCH_NAME --no-edit
           fi
+
+          done
+
+
