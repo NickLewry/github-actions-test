@@ -110,9 +110,9 @@ jobs:
 
           echo "listing repos"
 
-          gh pr list
+          gh pr list --repo "https://github.com/$i"
 
-          cd "/""
+          cd "/"
 
           cd "home/runner/work/github-actions-test/github-actions-test"
 
