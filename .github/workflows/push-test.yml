@@ -25,7 +25,7 @@ jobs:
           SOURCE_DIR="utils"
           TARGET_DIRECTORY="hello"
 
-          declare -a TARGET_REPOSITORIES=("NickLewry/beer-utiful.git" "NickLewry/next-msw-swr.git")
+          declare -a TARGET_REPOSITORIES=("NickLewry/beer-utiful.git" "NickLewry/recibae.git")
 
           for i in "${TARGET_REPOSITORIES[@]}";
           do
