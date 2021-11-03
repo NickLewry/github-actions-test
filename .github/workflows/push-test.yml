@@ -76,7 +76,7 @@ jobs:
           git diff-index --quiet HEAD || git commit --message "schema updates"
 
           echo "[+] Pushing git commit"
-          git push --set-upstream "https://$PUSH_REPO_TOKEN@github.com/$DESTINATION_REPOSITORY_NAME/" $BRANCH_NAME
+          git push --force --set-upstream "https://$PUSH_REPO_TOKEN@github.com/$DESTINATION_REPOSITORY_NAME/" $BRANCH_NAME
 
           echo "Creating pull request"
           hub pull-request -b "master" -h $BRANCH_NAME --no-edit
