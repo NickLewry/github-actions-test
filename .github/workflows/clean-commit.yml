@@ -13,17 +13,9 @@ jobs:
         run: |
             echo "Changes detected - ${{ github.event.head_commit.message }}"
             SUB='[skip]'
-            rewritten_commit=''
             for commit in $(git rev-list $branch)
             do
                 if $commit == *"$SUB"* ; then
                     echo $commit
-                    rewritten_commit = "${{ github.event.head_commit.message }}" | sed -r 's/\[ci skip\]+//g'
-                    echo $rewritten_commit
-                    git config --global user.name 'GitHub Actions'
-                    git config --global user.email 'actions@github.com'
-                    git commit --amend -m '${{rewritten_commit}}' \
-                    --author '${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>'
-                    git push
                 fi
             done
