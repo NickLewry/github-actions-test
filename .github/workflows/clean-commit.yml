@@ -12,6 +12,7 @@ jobs:
       - name: Clean new commit to main
         run: |
             echo "Changes detected - ${{ github.event.head_commit.message }}"
+            echo "${{ github.event.head_commit.message }}" | sed -r 's/skip+/_/g'
             git config --global user.name 'GitHub Actions'
             git config --global user.email 'actions@github.com'
             git commit -am "Automated report" \
