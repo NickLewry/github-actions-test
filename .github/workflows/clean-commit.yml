@@ -13,7 +13,7 @@ jobs:
         run: |
             echo "Changes detected - ${{ github.event.head_commit.message }}"
             echo "${{ github.event.head_commit.message }}" | sed -r 's/\[ci skip\]+//g'
-            rewritten_commit = "${{ github.event.head_commit.message }}" | sed -r 's/[ci skip]+//g'
+            rewritten_commit = "${{ github.event.head_commit.message }}" | sed -r 's/\[ci skip\]+//g'
             git config --global user.name 'GitHub Actions'
             git config --global user.email 'actions@github.com'
             git commit --amend -m '${{rewritten_commit}}' \
