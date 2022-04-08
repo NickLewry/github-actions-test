@@ -13,6 +13,7 @@ jobs:
         run: |
             echo "Changes detected - ${{ github.event.head_commit.message }}"
             SUB='[skip]'
+            rewritten_commit=''
             for commit in $(git rev-list $branch)
             do
                 if $commit == *"$SUB"* ; then
