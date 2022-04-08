@@ -13,15 +13,7 @@ jobs:
         run: |
             echo "Changes detected - ${{ github.event.head_commit.message }}"
             SUB='[skip]'
-<<<<<<< HEAD
             for commit in $(git log --oneline $branch ^origin/main)
             do
                 echo $commit
-=======
-            for commit in $(git rev-list $branch)
-            do
-                if $commit == *"$SUB"* ; then
-                    echo $commit
-                fi
->>>>>>> 5024c80a39a8cb51770f9df9c2df7129ec15b7e0
             done
